@@ -1,0 +1,16 @@
+.hero {
+  height: 100%;
+  &__container {
+    background-image: url('img/hero.jpg');
+    background-size: cover;
+    height: 100vh;
+
+    .hero__text {
+      line-height: 1;
+      padding: 10rem 12rem;
+      font-size: 7rem;
+      font-weight: 800;
+      width: min-content;
+    }
+  }
+}
