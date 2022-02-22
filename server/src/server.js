@@ -1,15 +1,13 @@
+require('dotenv').config()
 const express = require('express')
+const userRoutes = require('./routes/userRoutes')
 
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-app.post('/alert', async (req, res) => {
-  res.json(req.body)
-})
-
-app.post('/register', async (req, res) => {})
+app.use('/', userRoutes)
 
 app.listen(5000, () => {
   console.log('Running at http://localhost:5000')

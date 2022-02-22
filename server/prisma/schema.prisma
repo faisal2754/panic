@@ -10,8 +10,8 @@ datasource db {
   url      = env("DB_URL")
 }
 
-model client {
-  client_id         Int    @id @default(autoincrement())
+model user {
+  user_id           Int    @id @default(autoincrement())
   first_name        String @db.VarChar(255)
   last_name         String @db.VarChar(255)
   email             String @unique @db.VarChar(255)
