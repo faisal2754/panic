@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.1-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASS}
+      - POSTGRES_DB=${PG_DB}
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASS}
+    ports:
+      - 5050:80
+    depends_on:
+      - db
+
+  # web:
+  #   build: .
+  #   image: faisal/aura-server
+  #   container_name: server
+  #   command: npm run dev
+  #   volumes:
+  #     - ./appdata:/usr/app
+  #     - ./nodemodules:/usr/app/node_modules
+  #   links:
+  #     - db
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - '5000:5000'
+
+volumes:
+  db:
