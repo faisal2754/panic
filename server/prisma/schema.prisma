@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,6 +5,11 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DB_URL")
+}
+
+enum ProviderType {
+  CRIME
+  HEALTH
 }
 
 model users {
@@ -19,6 +21,7 @@ model users {
   phone             String   @db.VarChar(255)
   emergency_contact String   @db.VarChar(255)
   created_at        DateTime @default(now())
+  panics            panics[]
 }
 
 model service_providers {
@@ -32,7 +35,11 @@ model service_providers {
   provider_type       ProviderType
 }
 
-enum ProviderType {
-  CRIME
-  HEALTH
+model panics {
+  panic_id               Int          @id @default(autoincrement())
+  location               String       @db.VarChar(255)
+  created_at             DateTime     @default(now())
+  required_provider_type ProviderType
+  user_id                Int
+  user                   users        @relation(fields: [user_id], references: [user_id])
 }
