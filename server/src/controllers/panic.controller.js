@@ -39,4 +39,18 @@ const createPanic = async (req, res) => {
     : res.status(400).json({ msg: 'Something went wrong' })
 }
 
-module.exports = { createPanic }
+const getPanics = async (req, res) => {
+  const panics = await prisma.panics.findMany({
+    include: {
+      user: {
+        select: { first_name: true, last_name: true, email: true, phone: true }
+      }
+    }
+  })
+
+  return panics
+    ? res.json(panics)
+    : res.status(400).json({ msg: 'Something went wrong' })
+}
+
+module.exports = { createPanic, getPanics }
