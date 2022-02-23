@@ -1,14 +1,13 @@
-const { PrismaClient } = require('@prisma/client')
 const argon2 = require('argon2')
 const jwt = require('jsonwebtoken')
+const { ProviderType } = require('@prisma/client')
 
-const prisma = new PrismaClient()
+const prisma = require('../prismaClient')
 
 const emptyReq = { msg: 'Please enter all fields' }
 
 const register = async (req, res) => {
-  const { firstName, lastName, email, password, phone, emergencyContact } =
-    req.body
+  const { firstName, lastName, email, password, phone, providerType } = req.body
 
   if (
     !firstName ||
@@ -16,12 +15,25 @@ const register = async (req, res) => {
     !email ||
     !password ||
     !phone ||
-    !emergencyContact
+    !providerType
   ) {
     return res.status(400).json(emptyReq)
   }
 
-  const userExists = await prisma.user.findFirst({ where: { email } })
+  const enumProviderType = providerType.toUpperCase()
+
+  if (
+    enumProviderType !== ProviderType.HEALTH &&
+    enumProviderType !== ProviderType.CRIME
+  ) {
+    return res
+      .status(400)
+      .json({ msg: 'Please enter either HEALTH or CRIME for providerType' })
+  }
+
+  const userExists = await prisma.service_providers.findFirst({
+    where: { email }
+  })
 
   if (userExists) {
     return res.status(400).json({ msg: 'User already exists' })
@@ -29,24 +41,25 @@ const register = async (req, res) => {
 
   const hashedPass = await argon2.hash(password)
 
-  const user = await prisma.user.create({
+  const user = await prisma.service_providers.create({
     data: {
       first_name: firstName,
       last_name: lastName,
       email: email,
       password: hashedPass,
       phone: phone,
-      emergency_contact: emergencyContact
+      provider_type: enumProviderType
     }
   })
 
   return user
     ? res.json({
-        id: user.user_id,
+        id: user.service_provider_id,
         firstName: user.first_name,
         lastName: user.last_name,
         email: user.email,
-        token: generateToken(user.user_id)
+        providerType: user.provider_type,
+        token: generateToken(user.service_provider_id)
       })
     : res.status(400).json({ msg: 'Something went wrong' })
 }
@@ -57,19 +70,24 @@ const login = async (req, res) => {
     return res.status(400).json(emptyReq)
   }
 
-  const user = await prisma.user.findFirst({ where: { email } })
+  const user = await prisma.service_providers.findFirst({ where: { email } })
 
   if (user && (await argon2.verify(user.password, password))) {
     return res.json({
-      id: user.user_id,
+      id: user.service_provider_id,
       firstName: user.first_name,
       lastName: user.last_name,
       email: user.email,
-      token: generateToken(user.user_id)
+      providerType: user.provider_type,
+      token: generateToken(user.service_provider_id)
     })
   } else {
     return res.status(400).json({ msg: 'Incorrect email or password' })
   }
+}
+
+const me = async (req, res) => {
+  res.json(req.user)
 }
 
 const generateToken = (client_id) => {
@@ -78,4 +96,4 @@ const generateToken = (client_id) => {
   })
 }
 
-module.exports = { register, login }
+module.exports = { register, login, me }
