@@ -12,6 +12,12 @@ enum ProviderType {
   HEALTH
 }
 
+enum PanicStatus {
+  UNATTENDED
+  PENDING
+  RESOLVED
+}
+
 model users {
   user_id           Int      @id @default(autoincrement())
   first_name        String   @db.VarChar(255)
@@ -39,6 +45,7 @@ model panics {
   panic_id               Int          @id @default(autoincrement())
   location               String       @db.VarChar(255)
   created_at             DateTime     @default(now())
+  status                 PanicStatus  @default(UNATTENDED)
   required_provider_type ProviderType
   user_id                Int
   user                   users        @relation(fields: [user_id], references: [user_id])
