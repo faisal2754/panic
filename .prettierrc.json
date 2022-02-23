@@ -1,0 +1,15 @@
+{
+  "trailingComma": "none",
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
+  "prettier.endOfLine": "auto",
+  "overrides": [
+    {
+      "files": ["*.json", "*.yml"],
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}
