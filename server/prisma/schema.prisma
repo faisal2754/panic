@@ -11,13 +11,14 @@ datasource db {
 }
 
 model users {
-  user_id           Int    @id @default(autoincrement())
-  first_name        String @db.VarChar(255)
-  last_name         String @db.VarChar(255)
-  email             String @unique @db.VarChar(255)
-  password          String @db.VarChar(255)
-  phone             String @db.VarChar(255)
-  emergency_contact String @db.VarChar(255)
+  user_id           Int      @id @default(autoincrement())
+  first_name        String   @db.VarChar(255)
+  last_name         String   @db.VarChar(255)
+  email             String   @unique @db.VarChar(255)
+  password          String   @db.VarChar(255)
+  phone             String   @db.VarChar(255)
+  emergency_contact String   @db.VarChar(255)
+  created_at        DateTime @default(now())
 }
 
 model service_providers {
@@ -29,17 +30,9 @@ model service_providers {
   phone               String       @db.VarChar(255)
   created_at          DateTime     @default(now())
   provider_type       ProviderType
-
-  // provider_type provider_type @relation(fields: [provider_type_id], references: [provider_type_id])
 }
 
 enum ProviderType {
   CRIME
   HEALTH
 }
-
-// model provider_type {
-//   provider_type_id  Int                 @id @default(autoincrement())
-//   name              String              @db.VarChar(255)
-//   service_providers service_providers[]
-// }
