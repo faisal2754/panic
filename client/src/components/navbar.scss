@@ -22,6 +22,7 @@
     .navbar__auth {
       button {
         @include btn;
+        border: 1px solid black;
       }
     }
   }
