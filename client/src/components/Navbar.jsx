@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './navbar.scss'
 
 const Navbar = () => {
@@ -8,7 +9,9 @@ const Navbar = () => {
           <img src="./img/logo.png" alt="logo" />
         </div>
         <div className="navbar__auth">
-          <button>Login</button>
+          <Link to="/start">
+            <button>Login</button>
+          </Link>
         </div>
       </div>
     </div>

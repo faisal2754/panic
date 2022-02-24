@@ -1,0 +1,55 @@
+@import '../styles/variables.scss';
+
+.start {
+  display: flex;
+
+  &__client {
+    background: rgb(2, 2, 84);
+    background: linear-gradient(
+      0deg,
+      rgba(2, 2, 84, 1) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+    height: calc(100vh - $navbar-height);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+
+  &__provider {
+    background: rgb(134, 0, 0);
+    background: linear-gradient(
+      0deg,
+      rgba(134, 0, 0, 1) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+    height: calc(100vh - $navbar-height);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+
+  .start__text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    line-height: 1.25;
+    font-size: 4rem;
+    font-weight: 500;
+
+    .start__tag-line {
+      font-weight: 800;
+    }
+  }
+
+  .start__register {
+    button {
+      @include btn;
+    }
+  }
+}

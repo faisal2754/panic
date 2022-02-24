@@ -1,8 +1,10 @@
+@import '../styles/variables.scss';
+
 .navbar {
-  background-color: rgba($color: #a75b38, $alpha: 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
+  height: $navbar-height;
 
   &__container {
     display: flex;
@@ -19,13 +21,7 @@
 
     .navbar__auth {
       button {
-        background-color: black;
-        color: whitesmoke;
-        font-size: 25px;
-        padding: 0.5rem;
-        margin: 1rem;
-        width: 12rem;
-        border-radius: 100vw;
+        @include btn;
       }
     }
   }
