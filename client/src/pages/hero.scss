@@ -1,16 +1,36 @@
+@import '../styles/variables.scss';
+
 .hero {
-  height: 100%;
+  color: whitesmoke;
+
   &__container {
-    background-image: url('img/hero.jpg');
-    background-size: cover;
-    height: 100vh;
+    height: calc(100vh - $navbar-height);
+    background: rgb(159, 0, 0);
+    background: linear-gradient(
+      160deg,
+      $provider-colour 0%,
+      rgba(0, 0, 0, 1) 50%,
+      $client-colour 100%
+    );
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 0 0 12rem;
 
     .hero__text {
-      line-height: 1;
-      padding: 10rem 12rem;
-      font-size: 7rem;
+      line-height: 1.25;
+      font-size: 6rem;
       font-weight: 800;
       width: min-content;
+      margin-bottom: 4rem;
+    }
+
+    .hero__start {
+      button {
+        @include btn;
+        width: 14rem;
+        padding: 0.8rem;
+      }
     }
   }
 }

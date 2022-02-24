@@ -1,4 +1,6 @@
-$navbar-height: 7.5rem;
+$navbar-height: 7rem;
+$client-colour: rgb(0, 0, 80);
+$provider-colour: rgb(110, 0, 0);
 
 @mixin btn {
   cursor: pointer;
@@ -7,7 +9,7 @@ $navbar-height: 7.5rem;
   color: rgb(0, 0, 0);
   font-size: 25px;
   font-weight: 500;
-  padding: 0.5rem;
+  padding: 0.6rem;
   margin: 1rem;
   width: 12rem;
   border-radius: 100vw;

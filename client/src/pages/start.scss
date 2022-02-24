@@ -2,14 +2,11 @@
 
 .start {
   display: flex;
+  color: whitesmoke;
 
   &__client {
     background: rgb(2, 2, 84);
-    background: linear-gradient(
-      0deg,
-      rgba(2, 2, 84, 1) 0%,
-      rgba(255, 255, 255, 1) 100%
-    );
+    background: linear-gradient(0deg, $client-colour 0%, rgb(0, 0, 0) 100%);
     height: calc(100vh - $navbar-height);
     flex: 1;
     display: flex;
@@ -20,11 +17,7 @@
 
   &__provider {
     background: rgb(134, 0, 0);
-    background: linear-gradient(
-      0deg,
-      rgba(134, 0, 0, 1) 0%,
-      rgba(255, 255, 255, 1) 100%
-    );
+    background: linear-gradient(0deg, $provider-colour 0%, rgb(0, 0, 0) 100%);
     height: calc(100vh - $navbar-height);
     flex: 1;
     display: flex;
