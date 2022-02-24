@@ -1,0 +1,52 @@
+@import '../styles/variables.scss';
+
+.client-register {
+  &__container {
+    color: whitesmoke;
+    min-height: calc(100vh - $navbar-height);
+    background: rgb(159, 0, 0);
+    background: linear-gradient(
+      160deg,
+      $provider-colour 0%,
+      rgba(0, 0, 0, 1) 50%,
+      $client-colour 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem 0;
+
+    .client-register__heading {
+      font-size: 3rem;
+    }
+
+    .client-register__form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      label {
+        margin-top: 1rem;
+        width: 100%;
+      }
+
+      input {
+        outline: none;
+        border: 1px solid white;
+        background-color: rgba($color: #ffffff, $alpha: 0.1);
+        color: whitesmoke;
+        font-size: large;
+        width: 18rem;
+        height: 3rem;
+        padding: 0.8rem;
+      }
+
+      button {
+        @include btn;
+        margin-top: 2rem;
+      }
+    }
+  }
+}

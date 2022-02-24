@@ -14,7 +14,7 @@ const Start = () => {
           <MdPermIdentity size="110px" />
         </div>
         <div className="start__register">
-          <Link to="#">
+          <Link to="/client-register">
             <button>Register</button>
           </Link>
         </div>
