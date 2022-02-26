@@ -47,8 +47,6 @@ const ClientRegister = () => {
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const handleChange = (e) => {
-    console.log(e.target.id)
-    console.log(e.target.value)
     setFormData((oldData) => ({
       ...oldData,
       [e.target.id]: e.target.value
@@ -72,30 +70,28 @@ const ClientRegister = () => {
 
   return (
     <div className="client-register">
-      <div className="client-register__container">
-        <h1 className="client-register__heading">Client Registration</h1>
-        <form className="client-register__form" onSubmit={handleSubmit}>
-          <label htmlFor="firstName">First Name</label>
-          <input id="firstName" value={firstName} onChange={handleChange} />
-          <label htmlFor="lastName">Last Name</label>
-          <input id="lastName" value={lastName} onChange={handleChange} />
-          <label htmlFor="email">Email</label>
-          <input id="email" value={email} onChange={handleChange} />
-          <label htmlFor="password">Password</label>
-          <input id="password" value={password} onChange={handleChange} />
-          <label htmlFor="confirmPass">Confirm Password</label>
-          <input id="confirmPass" value={confirmPass} onChange={handleChange} />
-          <label htmlFor="phone">Phone Number</label>
-          <input id="phone" value={phone} onChange={handleChange} />
-          <label htmlFor="emergencyContact">Emergency Contact Number</label>
-          <input
-            id="emergencyContact"
-            value={emergencyContact}
-            onChange={handleChange}
-          />
-          <button type="submit">Register</button>
-        </form>
-      </div>
+      <h1 className="client-register__heading">Client Registration</h1>
+      <form className="client-register__form" onSubmit={handleSubmit}>
+        <label htmlFor="firstName">First Name</label>
+        <input id="firstName" value={firstName} onChange={handleChange} />
+        <label htmlFor="lastName">Last Name</label>
+        <input id="lastName" value={lastName} onChange={handleChange} />
+        <label htmlFor="email">Email</label>
+        <input id="email" value={email} onChange={handleChange} />
+        <label htmlFor="password">Password</label>
+        <input id="password" value={password} onChange={handleChange} />
+        <label htmlFor="confirmPass">Confirm Password</label>
+        <input id="confirmPass" value={confirmPass} onChange={handleChange} />
+        <label htmlFor="phone">Phone Number</label>
+        <input id="phone" value={phone} onChange={handleChange} />
+        <label htmlFor="emergencyContact">Emergency Contact Number</label>
+        <input
+          id="emergencyContact"
+          value={emergencyContact}
+          onChange={handleChange}
+        />
+        <button type="submit">Register</button>
+      </form>
     </div>
   )
 }

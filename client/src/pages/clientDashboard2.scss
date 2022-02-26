@@ -1,0 +1,13 @@
+.dashboard {
+  display: flex;
+
+  &__drawer {
+    flex: 1;
+    background-color: lightgray;
+  }
+
+  &__content {
+    flex: 5;
+    background-color: darkgray;
+  }
+}
