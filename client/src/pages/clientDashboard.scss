@@ -5,23 +5,45 @@
   height: calc(100vh - $navbar-height);
 
   &__crime {
-    background-color: rgb(49, 105, 105);
+    background: rgb(2, 2, 84);
+    background: linear-gradient(0deg, $client-colour 0%, rgb(0, 0, 0) 100%);
+    border-right: 1px solid white;
+    color: whitesmoke;
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    .dashboard__crime-heading {
+      font-size: 3rem;
+    }
+
     button {
       @include btn;
+      color: whitesmoke;
+      background-color: rgb(170, 0, 0);
     }
   }
+
   &__health {
-    background-color: lightsteelblue;
+    background: rgb(2, 2, 84);
+    background: linear-gradient(0deg, $client-colour 0%, rgb(0, 0, 0) 100%);
+    color: whitesmoke;
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    .dashboard__health-heading {
+      font-size: 3rem;
+    }
+
     button {
       @include btn;
+      color: whitesmoke;
+      background-color: rgb(170, 0, 0);
     }
   }
 }

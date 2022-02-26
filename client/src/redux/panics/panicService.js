@@ -14,8 +14,21 @@ const createPanic = async (panicData, token) => {
   return response.data
 }
 
+const getPanics = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  const response = await axios.get(API_URL + 'all', config)
+
+  return response.data
+}
+
 const panicService = {
-  createPanic
+  createPanic,
+  getPanics
 }
 
 export default panicService
