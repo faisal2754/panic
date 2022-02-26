@@ -20,6 +20,8 @@ const createPanic = async (req, res) => {
       .json({ msg: 'Please enter either HEALTH or CRIME for providerType' })
   }
 
+  console.log(req.user)
+
   const panic = await prisma.panics.create({
     data: {
       location: location,

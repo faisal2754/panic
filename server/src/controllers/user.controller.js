@@ -74,8 +74,8 @@ const me = async (req, res) => {
   res.json(req.user)
 }
 
-const generateToken = (client_id) => {
-  return jwt.sign({ client_id }, process.env.JWT_SECRET, {
+const generateToken = (user_id) => {
+  return jwt.sign({ user_id }, process.env.JWT_SECRET, {
     expiresIn: '60d'
   })
 }

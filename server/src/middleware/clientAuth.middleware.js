@@ -11,6 +11,7 @@ const protect = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(' ')[1]
       const { user_id } = jwt.verify(token, process.env.JWT_SECRET)
+      console.log(user_id)
       req.user = await prisma.users.findFirst({
         where: { user_id },
         select: {
@@ -22,6 +23,8 @@ const protect = async (req, res, next) => {
           emergency_contact: true
         }
       })
+
+      console.log('user is: ', req.user)
 
       next()
     } catch (error) {
