@@ -1,15 +1,22 @@
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 
 import PanicRow from '../components/PanicRow'
 import { getPanics } from '../redux/panics/panicSlice'
-
 import './serviceProviderDashboard.scss'
 
 const ServiceProviderDashboard = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { panics } = useSelector((state) => state.panics)
   const { user } = useSelector((state) => state.providerAuth)
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/')
+    }
+  }, [])
 
   useEffect(() => {
     dispatch(getPanics())

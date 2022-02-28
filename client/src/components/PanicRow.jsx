@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import { updatePanic } from '../redux/panics/panicSlice'
@@ -19,15 +19,22 @@ const PanicRow = ({
 }) => {
   const [location, setLocation] = useState('')
   const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.providerAuth)
+  const config = {
+    headers: {
+      Authorization: `Bearer ${user.token}`
+    }
+  }
 
   useEffect(() => {
     axios
-      .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${locationLat},${locationLong}&key=AIzaSyAIlLhgxaSoq2AFHJXZHQ33Wh2TMXCOYq8`
+      .post(
+        'http://localhost:5000/utils/reverse-geocode',
+        { locationLat, locationLong },
+        config
       )
       .then((res) => {
-        console.log(res)
-        setLocation(res.data.results[0].formatted_address)
+        setLocation(res.data.data)
       })
   }, [location])
 
@@ -71,4 +78,5 @@ const PanicRow = ({
     </tr>
   )
 }
+
 export default PanicRow

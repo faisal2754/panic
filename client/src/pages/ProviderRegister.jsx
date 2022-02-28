@@ -41,8 +41,7 @@ const ProviderRegister = () => {
     }
 
     if (isSuccess || user) {
-      alert('logged in as provider')
-      // navigate('/')
+      navigate('/provider-dashboard/')
     }
 
     dispatch(reset())

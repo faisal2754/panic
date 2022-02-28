@@ -76,4 +76,5 @@ const ClientDashboard = () => {
     </div>
   )
 }
+
 export default ClientDashboard

@@ -12,6 +12,8 @@ const Hero = () => {
   useEffect(() => {
     if (client) {
       navigate('/client-dashboard')
+    } else if (provider) {
+      navigate('/provider-dashboard')
     }
   }, [])
 

@@ -12,13 +12,11 @@ const Navbar = () => {
   const { user: provider } = useSelector((state) => state.providerAuth)
 
   const handleClientLogout = () => {
-    navigate('/')
     dispatch(clientLogout())
   }
 
   const handleProviderLogout = () => {
     dispatch(providerLogout())
-    navigate('/')
   }
 
   return (
