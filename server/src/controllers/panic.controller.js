@@ -4,9 +4,9 @@ const prisma = require('../prismaClient')
 const emptyReq = { msg: 'Please enter all fields' }
 
 const createPanic = async (req, res) => {
-  const { location, requiredProviderType } = req.body
+  const { locationLat, locationLong, requiredProviderType } = req.body
 
-  if (!location || !requiredProviderType) {
+  if (!locationLat || !locationLong || !requiredProviderType) {
     return res.status(400).json(emptyReq)
   }
 
@@ -20,11 +20,10 @@ const createPanic = async (req, res) => {
       .json({ msg: 'Please enter either HEALTH or CRIME for providerType' })
   }
 
-  console.log(req.user)
-
   const panic = await prisma.panics.create({
     data: {
-      location: location,
+      locationLat: locationLat,
+      locationLong: locationLong,
       required_provider_type: enumProviderType,
       user_id: req.user.user_id
     }
@@ -33,12 +32,36 @@ const createPanic = async (req, res) => {
   return panic
     ? res.json({
         panic_id: panic.panic_id,
-        location: panic.location,
+        locationLat: panic.locationLat,
+        locationLong: panic.locationLong,
         time: panic.created_at,
         providerType: panic.required_provider_type,
         user: panic.user
       })
     : res.status(400).json({ msg: 'Something went wrong' })
+}
+
+const updatePanic = async (req, res) => {
+  const { panicId, status } = req.body
+
+  const enumStatus = status.toUpperCase()
+
+  if (enumStatus !== 'PENDING' && enumStatus !== 'RESOLVED') {
+    return res
+      .status(400)
+      .json({ msg: 'Please enter either PENDING or RESOLVED for status' })
+  }
+
+  if (!panicId || !status) {
+    return res.status(400).json(emptyReq)
+  }
+
+  const updatedPanic = await prisma.panics.update({
+    where: { panic_id: Number(panicId) },
+    data: { status: enumStatus }
+  })
+
+  return res.json(updatePanic)
 }
 
 const getPanics = async (req, res) => {
@@ -55,4 +78,4 @@ const getPanics = async (req, res) => {
     : res.status(400).json({ msg: 'Something went wrong' })
 }
 
-module.exports = { createPanic, getPanics }
+module.exports = { createPanic, getPanics, updatePanic }

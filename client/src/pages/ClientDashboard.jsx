@@ -1,33 +1,61 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { GiAmbulance, GiPoliceCar } from 'react-icons/gi'
-import { createPanic } from '../redux/panics/panicSlice'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
 import './clientDashboard.scss'
+import { useEffect } from 'react'
+import { createPanic } from '../redux/panics/panicSlice'
 
 const ClientDashboard = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const panicCrimeData = {
-    location: 'home',
+    locationLat: 2,
+    locationLong: 3,
     requiredProviderType: 'crime'
   }
+
   const panicHealthData = {
-    location: 'home',
+    locationLat: 2,
+    locationLong: 3,
     requiredProviderType: 'health'
   }
 
   const { isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.panic
+    (state) => state.panics
   )
 
+  const { user } = useSelector((state) => state.clientAuth)
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/')
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast('Your panic has been recorded. We will be in touch soon!')
+    }
+  }, [isSuccess])
+
   const handleCrimePanic = () => {
-    dispatch(createPanic(panicCrimeData))
+    navigator.geolocation.getCurrentPosition((pos) => {
+      panicCrimeData['locationLat'] = pos.coords.latitude
+      panicCrimeData['locationLong'] = pos.coords.longitude
+      dispatch(createPanic(panicCrimeData))
+    })
   }
 
   const handleHealthPanic = () => {
-    dispatch(createPanic(panicHealthData))
+    navigator.geolocation.getCurrentPosition((pos) => {
+      panicHealthData['locationLat'] = pos.coords.latitude
+      panicHealthData['locationLong'] = pos.coords.longitude
+      dispatch(createPanic(panicHealthData))
+    })
   }
-
-  navigator.geolocation.getCurrentPosition((pos) => console.log(pos))
 
   return (
     <div className="dashboard">

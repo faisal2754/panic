@@ -1,0 +1,12 @@
+@import '../styles/variables.scss';
+
+.panic-creation {
+  height: calc(100vh - $navbar-height);
+  background: rgb(2, 2, 84);
+  background: linear-gradient(0deg, $client-colour 0%, rgb(0, 0, 0) 100%);
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}

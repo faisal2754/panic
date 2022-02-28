@@ -12,5 +12,10 @@ $provider-colour: rgb(110, 0, 0);
   padding: 0.6rem;
   margin: 1rem;
   width: 12rem;
-  border-radius: 100vw;
+  border-radius: 50vw;
+
+  &:hover {
+    color: whitesmoke;
+    background-color: black;
+  }
 }

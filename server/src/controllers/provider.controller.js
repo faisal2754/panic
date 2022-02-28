@@ -6,7 +6,7 @@ const prisma = require('../prismaClient')
 
 const emptyReq = { msg: 'Please enter all fields' }
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   const { firstName, lastName, email, password, phone, providerType } = req.body
 
   if (
@@ -36,7 +36,9 @@ const register = async (req, res) => {
   })
 
   if (userExists) {
-    return res.status(400).json({ msg: 'User already exists' })
+    res.status(400)
+    return next('User already exists')
+    // return res.status(400).json({ msg: 'User already exists' })
   }
 
   const hashedPass = await argon2.hash(password)

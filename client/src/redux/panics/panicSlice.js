@@ -14,8 +14,27 @@ export const createPanic = createAsyncThunk(
   'panics/create',
   async (panicData, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token
+      const token = thunkAPI.getState().clientAuth.user.token
       return await panicService.createPanic(panicData, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// Update panic
+export const updatePanic = createAsyncThunk(
+  'panics/update',
+  async (panicData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().providerAuth.user.token
+      return await panicService.updatePanic(panicData, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -33,7 +52,7 @@ export const getPanics = createAsyncThunk(
   'panics/getAll',
   async (_, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token
+      const token = thunkAPI.getState().providerAuth.user.token
       return await panicService.getPanics(token)
     } catch (error) {
       const message =
@@ -67,6 +86,24 @@ export const panicSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload
+      })
+      .addCase(updatePanic.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updatePanic.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      .addCase(updatePanic.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isError = false
+        state.panics.map((panic) => {
+          if (panic.panic_id === action.payload.panicId) {
+            panic.status = action.payload.status
+            return panic
+          }
+        })
       })
       .addCase(getPanics.pending, (state) => {
         state.isLoading = true

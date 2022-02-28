@@ -1,18 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { logout, reset } from '../redux/auth/authSlice'
+import { logout as clientLogout } from '../redux/auth/client/authSlice'
+import { logout as providerLogout } from '../redux/auth/provider/authSlice'
 
 import './navbar.scss'
 
 const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  )
+  const { user: client } = useSelector((state) => state.clientAuth)
+  const { user: provider } = useSelector((state) => state.providerAuth)
 
-  const handleLogout = () => {
-    dispatch(logout())
+  const handleClientLogout = () => {
+    navigate('/')
+    dispatch(clientLogout())
+  }
+
+  const handleProviderLogout = () => {
+    dispatch(providerLogout())
     navigate('/')
   }
 
@@ -25,8 +30,10 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar__auth">
-          {user ? (
-            <button onClick={handleLogout}>Logout</button>
+          {client ? (
+            <button onClick={handleClientLogout}>Logout</button>
+          ) : provider ? (
+            <button onClick={handleProviderLogout}>Logout</button>
           ) : (
             <Link to="/client-login">
               <button>Login</button>

@@ -1,0 +1,10 @@
+@import '../styles/variables.scss';
+
+.panic-row {
+  button {
+    @include btn;
+    width: 8rem;
+    margin: 0;
+    padding: 0.4rem;
+  }
+}

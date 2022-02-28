@@ -1,6 +1,6 @@
 @import '../styles/variables.scss';
 
-.client-login {
+.provider-login {
   color: whitesmoke;
   min-height: calc(100vh - $navbar-height);
   background: rgb(159, 0, 0);
@@ -54,7 +54,7 @@
     }
   }
 
-  &__provider {
+  &__client {
     a {
       color: whitesmoke;
     }

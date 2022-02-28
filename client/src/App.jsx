@@ -9,6 +9,10 @@ import ClientRegister from './pages/ClientRegister'
 import ClientDashboard from './pages/ClientDashboard'
 import ClientLogin from './pages/ClientLogin'
 import ClientDashboard2 from './pages/clientDashboard2'
+import PanicCreation from './pages/PanicCreation'
+import ProviderRegister from './pages/ProviderRegister'
+import ServiceProviderDashboard from './pages/ServiceProviderDashboard'
+import ProviderLogin from './pages/ProviderLogin'
 
 const App = () => {
   return (
@@ -21,6 +25,13 @@ const App = () => {
         <Route path="/client-login" element={<ClientLogin />} />
         <Route path="/client-dashboard" element={<ClientDashboard />} />
         <Route path="/client-dashboard2" element={<ClientDashboard2 />} />
+        <Route path="/panic-created" element={<PanicCreation />} />
+        <Route path="/provider-register" element={<ProviderRegister />} />
+        <Route path="/provider-login" element={<ProviderLogin />} />
+        <Route
+          path="/provider-dashboard"
+          element={<ServiceProviderDashboard />}
+        />
       </Routes>
       <ToastContainer />
     </div>

@@ -14,6 +14,18 @@ const createPanic = async (panicData, token) => {
   return response.data
 }
 
+const updatePanic = async (panicData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  const response = await axios.post(API_URL + 'update', panicData, config)
+
+  return response.data
+}
+
 const getPanics = async (token) => {
   const config = {
     headers: {
@@ -28,6 +40,7 @@ const getPanics = async (token) => {
 
 const panicService = {
   createPanic,
+  updatePanic,
   getPanics
 }
 

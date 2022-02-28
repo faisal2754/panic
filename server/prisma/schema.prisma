@@ -43,7 +43,8 @@ model service_providers {
 
 model panics {
   panic_id               Int          @id @default(autoincrement())
-  location               String       @db.VarChar(255)
+  locationLat            Float
+  locationLong           Float
   created_at             DateTime     @default(now())
   status                 PanicStatus  @default(UNATTENDED)
   required_provider_type ProviderType

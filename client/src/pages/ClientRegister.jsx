@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { register, reset } from '../redux/auth/authSlice'
+import { register, reset } from '../redux/auth/client/authSlice'
 import './clientRegister.scss'
 
 const ClientRegister = () => {
@@ -31,7 +31,7 @@ const ClientRegister = () => {
   const dispatch = useDispatch()
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
+    (state) => state.clientAuth
   )
 
   useEffect(() => {

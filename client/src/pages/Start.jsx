@@ -28,7 +28,7 @@ const Start = () => {
           <MdHealthAndSafety size="110px" />
         </div>
         <div className="start__register">
-          <Link to="#">
+          <Link to="/provider-register">
             <button>Register</button>
           </Link>
         </div>

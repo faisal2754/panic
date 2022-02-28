@@ -1,6 +1,6 @@
 @import '../styles/variables.scss';
 
-.client-login {
+.provider-register {
   color: whitesmoke;
   min-height: calc(100vh - $navbar-height);
   background: rgb(159, 0, 0);
@@ -26,12 +26,12 @@
     justify-content: center;
     flex-direction: column;
 
-    label {
+    .provider-register__label {
       margin-top: 1rem;
       width: 100%;
     }
 
-    input {
+    .provider-register__text-input {
       outline: none;
       border: 1px solid white;
       background-color: rgba($color: #ffffff, $alpha: 0.1);
@@ -42,21 +42,39 @@
       padding: 0.8rem;
     }
 
+    fieldset {
+      display: flex;
+      flex-direction: column;
+      border: none;
+    }
+
+    .radio-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      margin-top: 1rem;
+      width: 100%;
+
+      legend {
+        margin-bottom: 1rem;
+      }
+
+      label {
+        font-weight: 600;
+      }
+
+      input {
+        accent-color: black;
+        margin: 0 2rem 0 0.5rem;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
     button {
       @include btn;
       margin-top: 2rem;
-    }
-  }
-
-  &__register {
-    a {
-      color: whitesmoke;
-    }
-  }
-
-  &__provider {
-    a {
-      color: whitesmoke;
     }
   }
 }

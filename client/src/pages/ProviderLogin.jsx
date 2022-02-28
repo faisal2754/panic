@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { login, reset } from '../redux/auth/client/authSlice'
-import './clientLogin.scss'
+import { login, reset } from '../redux/auth/provider/authSlice'
+import './providerLogin.scss'
 
-const ClientLogin = () => {
+const ProviderLogin = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -17,7 +17,7 @@ const ClientLogin = () => {
   const navigate = useNavigate()
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.clientAuth
+    (state) => state.providerAuth
   )
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const ClientLogin = () => {
     }
 
     if (isSuccess || user) {
-      navigate('/client-dashboard')
+      navigate('/provider-dashboard')
     }
 
     dispatch(reset())
@@ -42,31 +42,33 @@ const ClientLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const clientData = {
+    const providerData = {
       email,
       password
     }
 
-    dispatch(login(clientData))
+    dispatch(login(providerData))
   }
 
   return (
-    <div className="client-login">
-      <h1 className="client-login__heading">Client Login</h1>
-      <form className="client-login__form" onSubmit={handleSubmit}>
+    <div className="provider-login">
+      <h1 className="provider-login__heading">Provider Login</h1>
+      <form className="provider-login__form" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input id="email" value={email} onChange={handleChange} />
         <label htmlFor="password">Password</label>
         <input id="password" value={password} onChange={handleChange} />
         <button type="submit">Login</button>
       </form>
-      <div className="client-login__register">
-        Don't have an account? <Link to="/client-register">Register Here</Link>
+      <div className="provider-login__register">
+        Don't have an account?{' '}
+        <Link to="/provider-register">Register Here</Link>
       </div>
-      <div className="client-login__provider">
-        Are you a provider? <Link to="/provider-login">Login Here</Link>
+      <div className="provider-login__client">
+        Are you a client? <Link to="/client-login">Login Here</Link>
       </div>
     </div>
   )
 }
-export default ClientLogin
+
+export default ProviderLogin
